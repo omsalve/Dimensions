@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
-import ScrollRevealText from './ScrollRevealText'; // Import our new component
+import ScrollRevealText from './ScrollRevealText'; // Your new component is already imported
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,8 +53,8 @@ const CSR = () => {
               Beyond the Fest: Our Social Responsibility
             </h2>
             <ScrollRevealText
-              text={paragraphText}
-              className="text-lg leading-relaxed"
+              sentence={paragraphText}
+              className="text-2xl leading-relaxed text-white"
             />
           </div>
 

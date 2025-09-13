@@ -94,7 +94,11 @@ export default function Home() {
                 />
               </div>
               <p className="max-w-2xl text-lg text-slate-200">
-                Celebrating our 30th Pearl Jubilee...
+                Step into Dimensions' 30th Pearl Jubilee at V.G. Vaze College, an exhilarating festival where youthful spirit defies the ordinary. <br />
+
+Witness the brilliance of 120+ colleges in over 30 events, joining 20,000+ attendees for two thrilling days in the heart of Mumbai. <br />
+
+Experience a legacy of excellence and unforgettable moments, fueled by the passion of a 600+ member team. <br />
               </p>
             </main>
           </div>

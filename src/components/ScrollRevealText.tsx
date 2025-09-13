@@ -1,58 +1,84 @@
 "use client";
 
-import { useLayoutEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 type ScrollRevealTextProps = {
-  text: string;
+  sentence?: string;
+  fontSize?: string;
+  lineHeight?: string;
   className?: string;
 };
 
-const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({ text, className }) => {
-  const textContainerRef = useRef<HTMLParagraphElement>(null);
+const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
+  sentence = "",
+  fontSize = "2rem",
+  lineHeight = "3rem",
+  className = ""
+}) => {
+  const containerRef = useRef<HTMLParagraphElement>(null);
 
-  useLayoutEffect(() => {
-    const textContainer = textContainerRef.current;
-    if (!textContainer) return;
+  useEffect(() => {
+    if (!containerRef.current || !sentence) return;
 
-    // Split the paragraph into words and wrap each in a span
-    const words = text.split(' ').map(word => {
-      const span = document.createElement('span');
-      // FIX: Add a space after each word for proper spacing
-      span.textContent = word + ' '; 
-      span.className = 'inline-block';
-      return span;
-    });
+    const words = Array.from(containerRef.current.querySelectorAll(".word"));
+    const totalWords = words.length;
 
-    textContainer.innerHTML = '';
-    words.forEach(word => textContainer.appendChild(word));
+    // FIX: Make the initial state more opaque/dim
+    gsap.set(words, { opacity: 0.2, filter: "brightness(50%)" });
 
-    gsap.to(words, {
-      color: '#FFFFFF',
-      opacity: 1,
-      // FIX: Increased stagger for a slower, more deliberate word-by-word reveal
-      stagger: 0.5, 
-      ease: 'power2.inOut',
-      scrollTrigger: {
-        trigger: textContainer,
-        start: 'top 70%',
-        end: 'bottom 80%',
-        // FIX: Increased scrub value to make the animation feel slower and smoother
-        scrub: 2, 
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 80%",
+      end: "bottom 90%",
+      scrub: 2,
+      onUpdate: (self: ScrollTrigger) => {
+        const progress = self.progress;
+        const index = Math.floor(progress * totalWords);
+
+        words.forEach((word, i) => {
+          // FIX: Updated opacity and brightness values
+          const targetOpacity = i < index ? 1 : 0.2;
+          const targetBrightness = i < index ? 100 : 50;
+
+          gsap.to(word, {
+            opacity: targetOpacity,
+            filter: `brightness(${targetBrightness}%)`,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        });
       },
     });
 
-  }, [text]);
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger: ScrollTrigger) => trigger.kill());
+    };
+  }, [sentence]);
+
+  if (!sentence) return null;
 
   return (
     <p
-      ref={textContainerRef}
-      className={`${className} text-slate-600 opacity-50`}
+      ref={containerRef}
+      className={className}
+      style={{
+        fontSize,
+        lineHeight,
+      }}
     >
-      {/* GSAP will populate this element */}
+      {sentence.split(" ").map((word, index) => (
+        <span
+          key={index}
+          className="word"
+          style={{ marginRight: "0.4em", display: "inline-block" }}
+        >
+          {word}
+        </span>
+      ))}
     </p>
   );
 };
