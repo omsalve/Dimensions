@@ -4,8 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import Header from "@/components/Header";
-import LightRays from "@/components/LightRays"; // Import the new LightRays component
+import SideMenu from "@/components/SideMenu"; // Import the new menu
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,23 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
-        <div className="fixed inset-0 -z-10 bg-black">
-          <LightRays
-            raysOrigin="top-center"
-            raysColor="#ffffffff" // Changed to a color that matches your theme
-            raysSpeed={1.5}
-            lightSpread={2}
-            rayLength={3}
-            followMouse={true}
-            mouseInfluence={0.5}
-            noiseAmount={0.05}
-            distortion={0.05}
-          />
-        </div>
+        <SideMenu /> {/* Add the new SideMenu here */}
         
-        <Header />
         <SmoothScroll>
           {children}
         </SmoothScroll>
