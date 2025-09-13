@@ -4,21 +4,23 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
-import ScrollRevealText from './ScrollRevealText'; // Your new component is already imported
+import ScrollRevealText from './ScrollRevealText';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// --- Component Content ---
 const csrImages = [
-    { src: 'https://picsum.photos/seed/csr1/600/800', alt: 'Placeholder image for a social initiative' },
-    { src: 'https://picsum.photos/seed/csr2/600/600', alt: 'Placeholder image for a social initiative' },
-    { src: 'https://picsum.photos/seed/csr3/600/900', alt: 'Placeholder image for a social initiative' },
-    { src: 'https://picsum.photos/seed/csr4/600/700', alt: 'Placeholder image for a social initiative' },
-    { src: 'https://picsum.photos/seed/csr5/600/500', alt: 'Placeholder image for a social initiative' },
-    { src: 'https://picsum.photos/seed/csr6/600/800', alt: 'Placeholder image for a social initiative' },
+    { src: 'https://picsum.photos/seed/csr1/600/800', alt: 'Community volunteers planting trees.' },
+    { src: 'https://picsum.photos/seed/csr2/600/600', alt: 'A group cleaning up a local beach.' },
+    { src: 'https://picsum.photos/seed/csr3/600/900', alt: 'Organizing a successful donation camp.' },
+    { src: 'https://picsum.photos/seed/csr4/600/700', alt: 'Students interacting with animals at a shelter.' },
+    { src: 'https://picsum.photos/seed/csr5/600/500', alt: 'Participants in a charity run event.' },
+    { src: 'https://picsum.photos/seed/csr6/600/800', alt: 'An awareness campaign in action.' },
 ];
 
 const paragraphText = "Dimensions is more than a celebration; it's a platform for positive change. We believe in empowering our community and nurturing our environment. Through initiatives like tree plantation drives, beach cleanups, and donation camps, we strive to create a lasting impact that resonates long after the curtains fall.";
 
+// --- Main CSR Component ---
 const CSR = () => {
     const masonryGridRef = useRef<HTMLDivElement>(null);
 
@@ -27,16 +29,24 @@ const CSR = () => {
 
         if (gridItems.length > 0) {
             gsap.fromTo(gridItems, 
-                { autoAlpha: 0, y: 50 },
+                { 
+                    autoAlpha: 0,    // Start invisible
+                    y: 60,           // Start slightly lower
+                    scale: 0.95,     // Start slightly smaller
+                    rotationZ: -2    // Start slightly tilted for a dynamic effect
+                },
                 {
-                    autoAlpha: 1,
+                    autoAlpha: 1,    // Fade in
                     y: 0,
-                    stagger: 0.1,
-                    duration: 0.8,
+                    scale: 1,
+                    rotationZ: 0,
+                    stagger: 0.1,    // Staggered animation for each item
+                    duration: 1,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: masonryGridRef.current,
-                        start: 'top 80%',
+                        start: 'top 85%', // Start animation when the grid is 85% from the top
+                        toggleActions: 'play none none none',
                     }
                 }
             );
@@ -48,26 +58,30 @@ const CSR = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           
+          {/* Left Column: Sticky Text Content */}
           <div className="sticky top-24">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter text-white">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 tracking-tighter text-white">
               Beyond the Fest: Our Social Responsibility
             </h2>
             <ScrollRevealText
               sentence={paragraphText}
-              className="text-2xl leading-relaxed text-white"
+              className="text-2xl leading-relaxed"
             />
           </div>
 
+          {/* Right Column: Animated Masonry Grid */}
           <div ref={masonryGridRef} className="masonry-grid">
             {csrImages.map((image, index) => (
               <div key={index} className="masonry-item mb-4 break-inside-avoid invisible">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={600}
-                  height={800}
-                  className="rounded-lg w-full h-auto"
-                />
+                <div className="overflow-hidden rounded-lg">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={600}
+                      height={800}
+                      className="rounded-lg w-full h-auto transition-transform duration-500 ease-in-out hover:scale-105"
+                    />
+                </div>
               </div>
             ))}
           </div >
