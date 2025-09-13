@@ -108,9 +108,7 @@ Experience a legacy of excellence and unforgettable moments, fueled by the passi
           <Teaser />
         </div>
 
-        <div ref={aboutRef} className="absolute inset-0">
-          <AboutSection />
-        </div>
+
       </div>
 
       {/* The CSR section and other content now follow in the normal document flow */}
