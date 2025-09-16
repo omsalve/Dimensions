@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
         hostname: 'placehold.co',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.scdn.co', // Added for the example image
+        port: '',
+        pathname: '/**',
       }
     ],
   },

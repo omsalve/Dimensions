@@ -18,7 +18,7 @@ const csrImages = [
     { src: 'https://picsum.photos/seed/csr6/600/800', alt: 'An awareness campaign in action.' },
 ];
 
-const paragraphText = "Dimensions is more than a celebration; it's a platform for positive change. We believe in empowering our community and nurturing our environment. Through initiatives like tree plantation drives, beach cleanups, and donation camps, we strive to create a lasting impact that resonates long after the curtains fall.";
+const paragraphText = "In 2024, Dimensions carried out impactful Community Engagement Activities (CEAs) under कर्मयोग (Karmayog), reflecting a strong commitment to social responsibility and compassion. Through करुणा, students promoted menstrual health and hygiene by distributing sanitary pads and stationery to underprivileged girls. कल्याण involved collecting and donating food grains to families in need, while कर्तव्य brought joy to children through skits and nutritious meals. These initiatives showcased Dimensions’ dedication to community welfare and inspired students to be empathetic, responsible changemakers.";
 
 // --- Main CSR Component ---
 const CSR = () => {
