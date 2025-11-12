@@ -110,8 +110,6 @@ export default function Home() {
 
       <ContactUs></ContactUs>
 
-
-
       <div className="h-screen bg-black flex items-center justify-center text-center p-4">
         <h2 className="text-2xl md:text-3xl text-white">More Sections Can Go Here</h2>
       </div>

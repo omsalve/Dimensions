@@ -6,14 +6,14 @@ const Teaser = () => {
       <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
         
         <video
-          src="/videos/teaser.mp4"
+          src="/videos/aftermovieteaserdimensions.mp4"
           autoPlay
           loop
           muted
           playsInline
           className="w-full h-full object-cover"
         />
-        <div className="absolute top-0 left-0 w-full h-full bg-black/60"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
       </div>
       
     </section>
