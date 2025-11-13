@@ -44,7 +44,7 @@ const ContactUs = () => {
           variants={itemVariants}
           className="text-lg text-slate-400 mb-16 max-w-2xl mx-auto text-center"
         >
-          Have a question or want to get involved? We'd love to hear from you.
+          Have a question or want to get involved? We&apos;d love to hear from you.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">

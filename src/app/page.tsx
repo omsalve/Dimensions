@@ -4,7 +4,6 @@ import { useLayoutEffect, useRef } from 'react';
 import Image from "next/image";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import AboutSection from "../components/AboutSection";
 import Teaser from "../components/Teaser";
 import CSR from "../components/CSR";
 import SponsorSection from '../components/SponsorSection'; // Import the SponsorSection
@@ -92,7 +91,7 @@ export default function Home() {
                 />
               </div>
               <p className="max-w-xl text-base sm:text-lg text-slate-200">
-                Step into Dimensions' 30th Pearl Jubilee at V.G. Vaze College...
+                Step into Dimensions&apos; 30th Pearl Jubilee at V.G. Vaze College...
               </p>
             </main>
           </div>

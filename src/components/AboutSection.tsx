@@ -3,7 +3,6 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,7 +29,7 @@ const AboutSection: React.FC = () => {
             30 Years of Defying Dimensions
           </h2>
           <p className="text-base sm:text-lg text-slate-400 mb-8">
-            This isn't just a festival; it's a legacy...
+            This isn&apos;t just a festival; it&apos;s a legacy...
           </p>
           <div className="stats-grid grid grid-cols-2 gap-4 sm:gap-8 text-center">
             <div className="stat-item">
