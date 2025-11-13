@@ -15,7 +15,7 @@ const sponsorLogos = [
 
 const SponsorSection = () => {
   return (
-    <section className="py-24 bg-black text-white">
+    <section className="py-24 bg-black text-white relative z-0">
       <div className="container mx-auto text-center px-4">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tighter">
           Our Valued Sponsors
