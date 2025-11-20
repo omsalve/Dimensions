@@ -1,71 +1,48 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import Link from "next/link";
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Events', href: '/events' },
-  { label: 'Sponsors', href: '/sponsors' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: "Home", href: "/#hero" },
+  { label: "Events", href: "/#events" },
+  { label: "Sponsors", href: "/#sponsors" },
+  { label: "About", href: "/#csr" },
+  { label: "Contact", href: "/#contact" },
 ];
 
-const SideMenu = () => {
+export default function SideMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Disable scroll when menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [isOpen]);
 
-  // FIX: Added 'as const' to ensure specific types are inferred
-  const menuVariants = {
+  const menuVariants: Variants = {
     closed: {
-      x: '100%',
-      transition: {
-        type: 'tween',
-        ease: 'easeInOut',
-        duration: 0.3,
-      },
+      x: 300,
+      transition: { duration: 0.35, ease: [0.42, 0, 0.58, 1] },
     },
     open: {
       x: 0,
-      transition: {
-        type: 'tween',
-        ease: 'easeInOut',
-        duration: 0.3,
-      },
+      transition: { duration: 0.35, ease: [0.42, 0, 0.58, 1] },
     },
-  } as const;
+  };
 
-  // FIX: Added 'as const' for consistency
-  const listVariants = {
-    closed: {
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
-    },
-    open: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  } as const;
+  const listVariants: Variants = {
+    open: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+    closed: {},
+  };
 
-  // FIX: Added 'as const' for consistency
-  const itemVariants = {
-    closed: { opacity: 0, y: 20 },
+  const itemVariants: Variants = {
     open: { opacity: 1, y: 0 },
-  } as const;
+    closed: { opacity: 0, y: 20 },
+  };
 
   return (
     <>
@@ -73,32 +50,23 @@ const SideMenu = () => {
       <motion.button
         className="fixed top-6 right-6 z-[1001] w-12 h-12 flex flex-col justify-center items-center gap-1.5"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
+        aria-label="Toggle Menu"
         animate={isOpen ? "open" : "closed"}
       >
         <motion.span
           className="block h-0.5 w-7 bg-white"
-          variants={{
-            closed: { rotate: 0, y: 0 },
-            open: { rotate: 45, y: 4 },
-          }}
-        ></motion.span>
+          variants={{ closed: { rotate: 0, y: 0 }, open: { rotate: 45, y: 4 } }}
+        />
         <motion.span
           className="block h-0.5 w-7 bg-white"
-          variants={{
-            closed: { opacity: 1 },
-            open: { opacity: 0 },
-          }}
-        ></motion.span>
+          variants={{ closed: { opacity: 1 }, open: { opacity: 0 } }}
+        />
         <motion.span
           className="block h-0.5 w-7 bg-white"
-          variants={{
-            closed: { rotate: 0, y: 0 },
-            open: { rotate: -45, y: -4 },
-          }}
-        ></motion.span>
+          variants={{ closed: { rotate: 0, y: 0 }, open: { rotate: -45, y: -4 } }}
+        />
       </motion.button>
-      
+
       <AnimatePresence>
         {isOpen && (
           <>
@@ -110,14 +78,13 @@ const SideMenu = () => {
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
             />
-            
-            {/* Menu Panel */}
+
+            {/* Slide-in Panel */}
             <motion.div
               className="fixed top-0 right-0 h-full w-full max-w-sm p-8 z-[1000] border-l border-white/10"
               style={{
-                backgroundColor: 'rgba(10, 10, 10, 0.7)',
-                backdropFilter: 'blur(20px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                backgroundColor: "rgba(10,10,10,0.7)",
+                backdropFilter: "blur(20px)",
               }}
               variants={menuVariants}
               initial="closed"
@@ -126,19 +93,22 @@ const SideMenu = () => {
             >
               <nav className="h-full flex flex-col justify-center">
                 <motion.ul
-                  className="flex flex-col gap-4"
                   variants={listVariants}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  className="flex flex-col gap-4"
                 >
                   {navItems.map((item) => (
-                    <motion.li key={item.label} variants={itemVariants}>
-                      <motion.a
+                    <motion.li key={item.href} variants={itemVariants}>
+                      <Link
                         href={item.href}
-                        className="block text-3xl text-slate-200 font-semibold transition-colors hover:text-white"
-                        whileHover={{ x: 10 }}
+                        scroll={true}
+                        className="block text-3xl text-slate-200 font-semibold hover:text-white"
                         onClick={() => setIsOpen(false)}
                       >
                         {item.label}
-                      </motion.a>
+                      </Link>
                     </motion.li>
                   ))}
                 </motion.ul>
@@ -149,6 +119,4 @@ const SideMenu = () => {
       </AnimatePresence>
     </>
   );
-};
-
-export default SideMenu;
+}

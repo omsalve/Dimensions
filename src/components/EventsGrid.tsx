@@ -14,16 +14,17 @@ const categories = [
   { name: "Sports" },
 ];
 
-const Events = () => {
+export default function EventsGrid() {
   return (
     <section className="py-20 px-6 md:px-12 lg:px-24 bg-black overflow-hidden">
+
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-4xl md:text-6xl font-bold text-center mb-20 text-white tracking-tight"
       >
-        Events
+        All Events
       </motion.h2>
 
       <div
@@ -63,7 +64,7 @@ const Events = () => {
               rotate: Math.random() * 3 - 1.5,
             }}
           >
-            <h3 className="text-white text-xl md:text-2xl font-semibold drop-shadow-lg text-center px-3">
+            <h3 className="text-white text-xl md:text-2xl font-semibold text-center px-3">
               {cat.name}
             </h3>
           </motion.div>
@@ -71,6 +72,4 @@ const Events = () => {
       </div>
     </section>
   );
-};
-
-export default Events;
+}

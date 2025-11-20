@@ -8,7 +8,7 @@ import Teaser from "../components/Teaser";
 import CSR from "../components/CSR";
 import SponsorSection from '../components/SponsorSection'; // Import the SponsorSection
 import ContactUs from "../components/ContactUs";
-import Events from '@/components/EventsSection';
+import EventsShowcase from "@/components/EventShowcase"
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -103,14 +103,21 @@ export default function Home() {
 
       </div>
 
-      <CSR />
-      
-      <SponsorSection /> {/* Added the SponsorSection here */}
+      <div id="csr">
+  <CSR />
+</div>
 
-      <Events></Events>
+<div id="sponsors">
+  <SponsorSection />
+</div>
 
+<div id="events">
+  <EventsShowcase />
+</div>
 
-      <ContactUs></ContactUs>
+<div id="contact">
+  <ContactUs />
+</div>
 
       <div className="h-screen bg-black flex items-center justify-center text-center p-4">
         <h2 className="text-2xl md:text-3xl text-white">More Sections Can Go Here</h2>
