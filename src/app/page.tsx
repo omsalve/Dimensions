@@ -8,7 +8,7 @@ import Teaser from "../components/Teaser";
 import CSR from "../components/CSR";
 import SponsorSection from '../components/SponsorSection'; // Import the SponsorSection
 import ContactUs from "../components/ContactUs";
-import EventsShowcase from "@/components/EventShowcase"
+import EventsGrid from '@/components/EventsGrid';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -112,7 +112,7 @@ export default function Home() {
 </div>
 
 <div id="events">
-  <EventsShowcase />
+  <EventsGrid />
 </div>
 
 <div id="contact">
